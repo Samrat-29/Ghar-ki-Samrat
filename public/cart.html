@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Cart — Ghar ki Samrat</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <nav class="navbar nav-scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="/home" class="logo"><div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span class="logo-text">Ghar ki Samrat</span></a>
+      <ul class="nav-links">
+        <li><a href="/home" class="nav-link">Home</a></li>
+        <li><a href="/home#properties" class="nav-link">Properties</a></li>
+        <li><a href="/sell.html" class="nav-link">Sell Property</a></li>
+        <li><a href="/cart.html" class="nav-link" style="color:var(--primary);">Cart</a></li>
+      </ul>
+      <div class="nav-auth" id="auth-buttons">
+        <button class="btn-login" onclick="window.location.href='/'">Log In</button>
+      </div>
+      <div class="user-menu" id="user-menu">
+        <span class="user-name" style="font-weight:600;margin-right:16px;">User</span>
+        <a href="/dashboard.html" style="font-weight:600;color:var(--primary);text-decoration:none;margin-right:16px;">My Profile</a>
+        <button class="btn-logout" data-action="logout">Logout</button>
+      </div>
+    </div>
+  </nav>
+  <main class="cart-page">
+    <div class="cart-container">
+      <div class="cart-header">
+        <h1>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          My Cart
+        </h1>
+        <span class="cart-item-count" id="cart-item-count">0 items</span>
+      </div>
+      <div id="cart-list" class="cart-list">
+        <div style="text-align:center;padding:60px 0;color:#9ca3af;">
+          <div class="spinner"></div>
+          <p style="margin-top:12px;">Loading cart...</p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer"><div class="footer-bottom"><p>&copy; 2026 Ghar ki Samrat. All rights reserved.</p></div></footer>
+  <script src="/auth.js"></script>
+  <script src="/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await Auth.init();
+      loadCartItems();
+      document.querySelectorAll('[data-action="logout"]').forEach(btn => {
+        btn.addEventListener('click', () => Auth.logout());
+      });
+    });
+    async function loadCartItems() {
+      const container = document.getElementById('cart-list');
+      const user = Auth.checkAuth();
+      if (!user) {
+        container.innerHTML = `
+          <div class="cart-empty">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            <h3>Please log in to view your cart</h3>
+            <p>Sign in to save and manage your favourite properties.</p>
+            <a href="/" class="btn-signup" style="text-decoration:none;display:inline-block;margin-top:16px;">Go to Home</a>
+          </div>`;
+        return;
+      }
+      try {
+        const res = await fetch('/cart');
+        const items = await res.json();
+        document.getElementById('cart-item-count').textContent = `${items.length} item${items.length !== 1 ? 's' : ''}`;
+        if (!items.length) {
+          container.innerHTML = `
+            <div class="cart-empty">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              <h3>Your cart is empty</h3>
+              <p>Browse properties and add your favourites to cart for easy comparison.</p>
+              <a href="/#properties" class="btn-signup" style="text-decoration:none;display:inline-block;margin-top:16px;">Browse Properties</a>
+            </div>`;
+          return;
+        }
+        container.innerHTML = items.map(item => {
+          const p = item.property;
+          const cleanPhone = p.phone?.replace(/[\s+]/g, '') || '919876543210';
+          const whatsappMsg = encodeURIComponent(`Hi! I'm interested in "${p.title}" on Ghar ki Samrat.`);
+          return `
+            <div class="cart-item" id="cart-${p.id}">
+              <img src="${p.image}" alt="${p.title}" class="cart-item-img" />
+              <div class="cart-item-info">
+                <h3>${p.title}</h3>
+                <p class="cart-item-location">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  ${p.location}
+                </p>
+                <span class="cart-item-price">${formatINR(p.price)}</span>
+                <div class="cart-item-specs">${p.bedrooms ? p.bedrooms + ' Beds' : ''} ${p.bathrooms ? '• ' + p.bathrooms + ' Baths' : ''} ${p.area ? '• ' + p.area + ' sq.ft' : ''}</div>
+              </div>
+              <div class="cart-item-actions">
+                <a href="/property.html?id=${p.id}" class="btn-view-sm">View</a>
+                <a href="tel:${p.phone}" class="btn-call-sm">📞 Call</a>
+                <a href="https://wa.me/${cleanPhone}?text=${whatsappMsg}" target="_blank" class="btn-wa-sm">💬 WhatsApp</a>
+                <button class="btn-remove" onclick="removeCartItem('${p.id}')">✕ Remove</button>
+              </div>
+            </div>`;
+        }).join('');
+      } catch (err) {
+        container.innerHTML = '<p style="text-align:center;color:#9ca3af;padding:40px 0;">Failed to load cart.</p>';
+      }
+    }
+    async function removeCartItem(propertyId) {
+      const el = document.getElementById('cart-' + propertyId);
+      if (el) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateX(-20px)';
+        el.style.transition = 'all 0.3s ease';
+      }
+      await removeFromCart(propertyId);
+      setTimeout(() => loadCartItems(), 300);
+    }
+  </script>
+</body>
+</html>

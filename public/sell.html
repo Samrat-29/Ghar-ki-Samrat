@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sell Property — Ghar ki Samrat</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <nav class="navbar nav-scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="/home" class="logo"><div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span class="logo-text">Ghar ki Samrat</span></a>
+      <ul class="nav-links">
+        <li><a href="/home" class="nav-link">Home</a></li>
+        <li><a href="/home#properties" class="nav-link">Properties</a></li>
+        <li><a href="/sell.html" class="nav-link" style="color:var(--primary);">Sell Property</a></li>
+        <li><a href="/cart.html" class="nav-link">Cart</a></li>
+      </ul>
+      <div class="nav-auth" id="auth-buttons">
+        <button class="btn-login" onclick="window.location.href='/'">Log In</button>
+      </div>
+      <div class="user-menu" id="user-menu">
+        <span class="user-name" style="font-weight:600;margin-right:16px;">User</span>
+        <a href="/dashboard.html" style="font-weight:600;color:var(--primary);text-decoration:none;margin-right:16px;">My Profile</a>
+        <button class="btn-logout" data-action="logout">Logout</button>
+      </div>
+    </div>
+  </nav>
+  <main class="sell-page">
+    <div class="sell-container">
+      <div class="sell-header">
+        <span class="section-badge">List Your Property</span>
+        <h1 class="section-title">Sell Your Property<br/>on Ghar ki Samrat</h1>
+        <p class="section-subtitle">Reach thousands of verified buyers across India. List your property in just 2 minutes.</p>
+      </div>
+      <div class="sell-form-card" id="sell-form-card">
+        <div class="sell-auth-notice" id="sell-auth-notice" style="display:none;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <p>Please <a href="/" style="color:var(--primary);font-weight:600;">log in</a> to list your property. It only takes a minute!</p>
+        </div>
+        <form class="sell-form" id="sell-property-form">
+          <h2>Property Details</h2>
+          <div class="sell-form-grid">
+            <div class="form-group">
+              <label for="sell-title">Property Title *</label>
+              <input type="text" id="sell-title" class="form-input" placeholder="e.g., 3BHK Apartment in Bandra" required />
+            </div>
+            <div class="form-group">
+              <label for="sell-price">Price (₹) *</label>
+              <input type="number" id="sell-price" class="form-input" placeholder="e.g., 25000000" required />
+            </div>
+            <div class="form-group">
+              <label for="sell-location">Location *</label>
+              <select id="sell-location" class="form-input" required>
+                <option value="">Select City</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Delhi">Delhi NCR</option>
+                <option value="Bangalore">Bangalore</option>
+                <option value="Kolkata">Kolkata</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Pune">Pune</option>
+                <option value="Jaipur">Jaipur</option>
+                <option value="Goa">Goa</option>
+                <option value="Ahmedabad">Ahmedabad</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sell-type">Property Type *</label>
+              <select id="sell-type" class="form-input" required>
+                <option value="Apartment">Apartment</option>
+                <option value="Villa">Villa</option>
+                <option value="Plot">Plot</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Penthouse">Penthouse</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sell-bedrooms">Bedrooms</label>
+              <select id="sell-bedrooms" class="form-input">
+                <option value="1">1 BHK</option>
+                <option value="2" selected>2 BHK</option>
+                <option value="3">3 BHK</option>
+                <option value="4">4 BHK</option>
+                <option value="5">5+ BHK</option>
+                <option value="0">N/A (Commercial)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sell-bathrooms">Bathrooms</label>
+              <select id="sell-bathrooms" class="form-input">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="sell-area">Area (sq.ft) *</label>
+              <input type="number" id="sell-area" class="form-input" placeholder="e.g., 1200" required />
+            </div>
+            <div class="form-group">
+              <label for="sell-phone">Contact Phone *</label>
+              <input type="tel" id="sell-phone" class="form-input" placeholder="+91 98765 43210" required />
+            </div>
+            <div class="form-group full-width">
+              <label for="sell-image-file">Upload Property Photo *</label>
+              <input type="file" id="sell-image-file" class="form-input" accept="image/*" capture="environment" required style="padding: 10px;" />
+              <div id="image-preview-container" style="margin-top: 12px; display: none;">
+                <img id="image-preview" style="max-width: 100%; border-radius: var(--radius-sm); border: 1px solid var(--border); box-shadow: var(--shadow-sm);" />
+              </div>
+            </div>
+            <div class="form-group full-width">
+              <label for="sell-description">Description *</label>
+              <textarea id="sell-description" class="form-input form-textarea" placeholder="Describe your property — features, amenities, nearby landmarks..." required rows="4"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit sell-submit">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Publish Listing
+          </button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <footer class="footer"><div class="footer-bottom"><p>&copy; 2026 Ghar ki Samrat. All rights reserved.</p></div></footer>
+  <script src="/auth.js"></script>
+  <script src="/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await Auth.init();
+      const user = Auth.checkAuth();
+      if (!user) {
+        document.getElementById('sell-auth-notice').style.display = 'flex';
+        document.getElementById('sell-property-form').style.opacity = '0.5';
+        document.getElementById('sell-property-form').style.pointerEvents = 'none';
+      }
+      let uploadedImageBase64 = '';
+      document.getElementById('sell-image-file')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) {
+          document.getElementById('image-preview-container').style.display = 'none';
+          uploadedImageBase64 = '';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const img = new Image();
+          img.onload = function() {
+            const canvas = document.createElement('canvas');
+            const MAX_WIDTH = 800;
+            const MAX_HEIGHT = 600;
+            let width = img.width;
+            let height = img.height;
+            if (width > height) {
+              if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+            } else {
+              if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            uploadedImageBase64 = canvas.toDataURL('image/jpeg', 0.8);
+            const preview = document.getElementById('image-preview');
+            preview.src = uploadedImageBase64;
+            document.getElementById('image-preview-container').style.display = 'block';
+          }
+          img.src = event.target.result;
+        }
+        reader.readAsDataURL(file);
+      });
+      document.getElementById('sell-property-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> Publishing...';
+        const data = {
+          title: document.getElementById('sell-title').value,
+          price: document.getElementById('sell-price').value,
+          location: document.getElementById('sell-location').value,
+          type: document.getElementById('sell-type').value,
+          bedrooms: document.getElementById('sell-bedrooms').value,
+          bathrooms: document.getElementById('sell-bathrooms').value,
+          area: document.getElementById('sell-area').value,
+          phone: document.getElementById('sell-phone').value,
+          image: uploadedImageBase64,
+          description: document.getElementById('sell-description').value
+        };
+        try {
+          const res = await fetch('/property', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          const result = await res.json();
+          if (result.success) {
+            showToast('Property listed successfully! 🎉', 'success');
+            e.target.reset();
+            setTimeout(() => window.location.href = '/dashboard.html', 1500);
+          } else {
+            showToast(result.message, 'error');
+          }
+        } catch (err) {
+          showToast('Failed to publish listing.', 'error');
+        }
+        btn.disabled = false;
+        btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Publish Listing';
+      });
+    });
+  </script>
+</body>
+</html>

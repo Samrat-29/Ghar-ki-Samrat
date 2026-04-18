@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Realnest</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #383838; }
+    .bg-main-image {
+      background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+    }
+    input::placeholder { color: #a1a1aa; font-weight: 500; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white shadow-2xl flex w-full max-w-[1200px] h-[800px] max-h-[90vh]">
+    <div class="hidden md:flex flex-col justify-between w-1/2 p-12 bg-main-image relative text-white">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/90"></div>
+      <div class="relative z-10 flex items-center gap-3">
+        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <span class="text-[22px] font-medium tracking-wide">Realnest</span>
+      </div>
+      <div class="relative z-10 pb-6">
+        <h1 class="text-5xl font-bold mb-6 tracking-tight leading-tight">Find your sweet home</h1>
+        <p class="text-white/90 text-sm font-medium mb-1">Schedule visit in just a few clicks</p>
+        <p class="text-white/90 text-sm font-medium mb-8">visits in just a few clicks</p>
+        <div class="flex gap-2.5 items-center">
+          <div class="h-1.5 w-10 bg-white rounded-full"></div>
+          <div class="h-1.5 w-1.5 bg-white/50 rounded-full"></div>
+          <div class="h-1.5 w-1.5 bg-white/50 rounded-full"></div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full md:w-1/2 p-8 md:p-14 relative flex flex-col bg-white overflow-y-auto">
+      <div class="absolute top-8 right-12">
+        <a href="/" class="px-8 py-2.5 bg-black text-white rounded-full text-sm font-medium hover:bg-gray-800 transition">Sign in</a>
+      </div>
+      <div class="flex-grow flex flex-col justify-center max-w-[420px] mx-auto w-full mt-16 md:mt-20">
+        <h2 class="text-[32px] font-extrabold text-[#1a1f36] mb-2 tracking-tight">Welcome Back to Realnest!</h2>
+        <p class="text-[#8c8c8c] text-[13px] font-medium mb-10">Sign in your account</p>
+        <form id="form-login" class="flex flex-col gap-5" onsubmit="handleLoginObj(event)">
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[13px] font-semibold text-[#5c5c5c]">Your Email</label>
+            <input type="text" id="login-mobile" placeholder="info.madhu786@gmail.com" class="w-full px-4 py-3.5 rounded-md border border-gray-300 focus:outline-none focus:border-gray-500 text-[#1a1f36] text-[15px]" required>
+          </div>
+          <div class="flex flex-col gap-1.5 mt-1">
+            <label class="text-[13px] font-semibold text-[#5c5c5c]">Password</label>
+            <div class="relative">
+              <input type="password" id="login-password" placeholder="•••••••••" class="w-full px-4 py-3.5 rounded-md border border-gray-300 focus:outline-none focus:border-gray-500 text-black text-[15px] font-medium tracking-widest" required>
+              <button type="button" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="flex items-center justify-between mt-2 mb-2">
+            <label class="flex items-center gap-2.5 cursor-pointer">
+              <input type="checkbox" checked class="w-4 h-4 rounded border-gray-300 text-black focus:ring-black accent-black">
+              <span class="text-[13px] text-[#1a1f36] font-semibold">Remember Me</span>
+            </label>
+            <a href="#" class="text-[13px] text-[#8c8c8c] font-medium hover:text-[#1a1f36] transition">Forgot Password?</a>
+          </div>
+          <p id="login-error" class="text-red-500 text-sm hidden font-medium"></p>
+          <button type="submit" class="w-full py-4 bg-[#1f2128] text-white rounded-md font-semibold hover:bg-black transition text-[15px]">Login</button>
+        </form>
+        <div class="flex items-center gap-4 my-8">
+          <div class="flex-grow h-px bg-gray-200/80"></div>
+          <span class="text-[12px] text-[#8c8c8c] font-medium">Instan Login</span>
+          <div class="flex-grow h-px bg-gray-200/80"></div>
+        </div>
+        <div class="flex gap-4 mb-10">
+          <button class="flex-1 flex items-center justify-center gap-2 py-3 border border-gray-200 rounded text-[13px] text-[#8c8c8c] font-semibold hover:bg-gray-50 transition">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-4 h-4">
+            Continue with Google
+          </button>
+          <button class="flex-1 flex items-center justify-center gap-2 py-3 border border-gray-200 rounded text-[13px] text-[#8c8c8c] font-semibold hover:bg-gray-50 transition">
+            <svg class="w-4 h-4 text-[#1877F2]" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Continue with Facebook
+          </button>
+        </div>
+        <p class="text-center text-[13px] text-[#8c8c8c] font-medium">
+          Don't have any acount? <a href="#" onclick="openRegister()" class="text-[#3b82f6] font-semibold hover:underline">Register</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <script src="/auth.js"></script>
+  <script>
+    async function handleLoginObj(event) {
+      event.preventDefault();
+      const mobile = document.getElementById('login-mobile').value;
+      const password = document.getElementById('login-password').value;
+      const btn = event.target.querySelector('button[type="submit"]');
+      const errEl = document.getElementById('login-error');
+      btn.textContent = 'Logging in...';
+      btn.disabled = true;
+      errEl.classList.add('hidden');
+      try {
+        const res = await Auth.login(mobile, password);
+        if (res.success) {
+          window.location.href = '/home';
+        } else {
+          errEl.textContent = res.message;
+          errEl.classList.remove('hidden');
+          btn.textContent = 'Login';
+          btn.disabled = false;
+        }
+      } catch (err) {
+        errEl.textContent = 'An error occurred during login.';
+        errEl.classList.remove('hidden');
+        btn.textContent = 'Login';
+        btn.disabled = false;
+      }
+    }
+    function openRegister() {
+      // In a real app, you might show a register form here.
+      // For now, redirect to the landing page with register modal open
+      window.location.href = '/landing.html?action=register';
+    }
+  </script>
+</body>
+</html>

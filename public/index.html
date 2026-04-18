@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ghar ki Samrat — India's premium real estate marketplace. Buy, sell, and invest in properties across Mumbai, Delhi, Bangalore, Kolkata, and more." />
+  <title>Ghar ki Samrat — Premium Real Estate in India</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/home" class="logo">
+        <div class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <span class="logo-text">Ghar ki Samrat</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#properties" class="nav-link">Properties</a></li>
+        <li><a href="/sell.html" class="nav-link">Sell Property</a></li>
+        <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+        <li><a href="#faq" class="nav-link">FAQs</a></li>
+      </ul>
+      <div class="user-menu" id="user-menu" style="display:flex;">
+        <a href="/cart.html" class="nav-cart-link" title="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          <span class="cart-count" style="display:none;">0</span>
+        </a>
+        <span class="user-name" style="font-weight:600;margin-right:16px;">User</span>
+        <a href="/dashboard.html" style="font-weight:600;text-decoration:none;margin-right:16px;" class="nav-link">My Profile</a>
+        <button class="btn-logout" data-action="logout">Logout</button>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-overlay" id="mobile-overlay"></div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#home" class="mobile-nav-link">Home</a>
+    <a href="#properties" class="mobile-nav-link">Properties</a>
+    <a href="/sell.html" class="mobile-nav-link">Sell Property</a>
+    <a href="/cart.html" class="mobile-nav-link">🛒 Cart</a>
+    <a href="#how-it-works" class="mobile-nav-link">How It Works</a>
+    <a href="#faq" class="mobile-nav-link">FAQs</a>
+    <div style="margin-top:24px;display:flex;flex-direction:column;gap:10px;" id="mobile-user-menu">
+      <span class="user-name" style="font-weight:600;font-size:16px;">User</span>
+      <button class="btn-logout" data-action="logout">Logout</button>
+    </div>
+  </div>
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&h=1080&fit=crop" alt="Premium Indian property" />
+    </div>
+    <div class="hero-gradient"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        India's Trusted Property Marketplace
+      </div>
+      <h1>Find Your Dream<br/>Property in India</h1>
+      <p class="hero-subtitle">
+        Discover premium homes, apartments, and commercial spaces across India's top cities.
+        From ₹50L to ₹50Cr — your perfect property awaits.
+      </p>
+      <div class="hero-search">
+        <div class="search-field" style="position: relative;">
+          <label>Location</label>
+          <input type="text" id="search-city" class="autocomplete-input" placeholder="Enter city or area..." autocomplete="off">
+          <div id="city-suggestions" class="suggestions-box"></div>
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-field">
+          <label>Property Type</label>
+          <select id="search-type">
+            <option value="all">All Types</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Villa">Villa</option>
+            <option value="Plot">Plot</option>
+            <option value="Commercial">Commercial</option>
+          </select>
+        </div>
+        <div class="search-divider"></div>
+        <div class="search-field">
+          <label>Budget</label>
+          <select id="search-price">
+            <option value="all">Any Budget</option>
+            <option value="0-5000000">Under ₹50 Lakh</option>
+            <option value="5000000-10000000">₹50L - ₹1 Cr</option>
+            <option value="10000000-25000000">₹1 Cr - ₹2.5 Cr</option>
+            <option value="25000000-50000000">₹2.5 Cr - ₹5 Cr</option>
+            <option value="50000000-">Above ₹5 Cr</option>
+          </select>
+        </div>
+        <button class="search-btn" id="search-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          Search
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-num">500+</span>
+          <span class="hero-stat-label">Properties</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">50+</span>
+          <span class="hero-stat-label">Cities</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">10K+</span>
+          <span class="hero-stat-label">Happy Buyers</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section features" id="insights">
+    <div class="section-container">
+      <div class="features-header">
+        <span class="section-badge">Why Choose Ghar ki Samrat</span>
+        <h2 class="section-title">Your Trusted Partner in<br/>Indian Real Estate</h2>
+        <p class="section-subtitle">
+          We bring transparency, security, and the best deals to your property journey across India.
+        </p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>RERA Verified</h3>
+          <p>All properties on our platform are RERA registered and legally verified. Invest with confidence knowing every listing meets regulatory standards.</p>
+        </div>
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <h3>Best Price Guarantee</h3>
+          <p>Get direct pricing from builders and owners with no hidden charges. We ensure you get the most competitive rates in the market.</p>
+        </div>
+        <div class="feature-card animate-on-scroll">
+          <div class="feature-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+          </div>
+          <h3>Instant Connect</h3>
+          <p>Contact sellers directly via WhatsApp or phone call. No middlemen, no delays — get instant responses to your property queries.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section how-it-works" id="how-it-works">
+    <div class="section-container">
+      <div class="how-header">
+        <div>
+          <span class="section-badge">Simple Process</span>
+          <h2 class="section-title">Buy or Sell in<br/>4 Easy Steps</h2>
+          <p class="section-subtitle">
+            Whether you're buying your dream home or selling a property — we make it effortless.
+          </p>
+        </div>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card animate-on-scroll">
+          <span class="step-number">1</span>
+          <h3>Browse Properties</h3>
+          <p>Search from hundreds of verified listings across Mumbai, Delhi, Bangalore, Kolkata, and other prime Indian cities.</p>
+        </div>
+        <div class="step-card animate-on-scroll">
+          <span class="step-number">2</span>
+          <h3>Shortlist & Compare</h3>
+          <p>Add properties to your cart, compare prices, locations, and amenities. Make informed decisions with detailed property data.</p>
+        </div>
+        <div class="step-card animate-on-scroll">
+          <span class="step-number">3</span>
+          <h3>Contact Seller</h3>
+          <p>Reach out directly via WhatsApp or phone call. Schedule site visits and negotiate prices without any intermediary.</p>
+        </div>
+        <div class="step-card animate-on-scroll">
+          <span class="step-number">4</span>
+          <h3>Close the Deal</h3>
+          <p>Complete paperwork with our legal assistance. From agreement to registration, we guide you through every step.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section properties-section" id="properties">
+    <div class="section-container">
+      <div class="properties-header">
+        <div>
+          <span class="section-badge">Featured Listings</span>
+          <h2 class="section-title">Premium Properties<br/>Across India</h2>
+          <p class="section-subtitle">
+            Handpicked properties from India's top cities. Verified, RERA compliant, and ready for you.
+          </p>
+        </div>
+      </div>
+      <div class="properties-grid" id="properties-grid">
+        <div style="grid-column:1/-1;text-align:center;padding:60px 0;color:#9ca3af;">
+          <div class="spinner"></div>
+          <p style="margin-top:12px;">Loading properties...</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section stats">
+    <div class="section-container">
+      <div class="stats-header">
+        <span class="section-badge">Platform Metrics</span>
+        <h2 class="section-title">Numbers That<br/>Speak Volumes</h2>
+        <p class="section-subtitle">
+          Join thousands of property buyers and sellers already trusting Ghar ki Samrat.
+        </p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-item animate-on-scroll">
+          <div class="stat-number" data-count="500" data-suffix="+">0</div>
+          <div class="stat-label">Properties Listed</div>
+        </div>
+        <div class="stat-item animate-on-scroll">
+          <div class="stat-number" data-count="120" data-prefix="₹" data-suffix=" Cr+">0</div>
+          <div class="stat-label">Worth of Transactions</div>
+        </div>
+        <div class="stat-item animate-on-scroll">
+          <div class="stat-number" data-count="10000" data-suffix="+">0</div>
+          <div class="stat-label">Happy Customers</div>
+        </div>
+        <div class="stat-item animate-on-scroll">
+          <div class="stat-number" data-count="50" data-suffix="+">0</div>
+          <div class="stat-label">Indian Cities</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section testimonials">
+    <div class="section-container">
+      <div class="testimonials-header">
+        <span class="section-badge">Customer Stories</span>
+        <h2 class="section-title">Trusted by Thousands<br/>Across India</h2>
+        <p class="section-subtitle">Real reviews from real property buyers and sellers.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Found my dream 3BHK in Bandra through Ghar ki Samrat. The WhatsApp connect feature made it so easy to talk to the seller directly. Closed the deal in just 2 weeks!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AP</div>
+            <div>
+              <div class="testimonial-name">Amit Patel</div>
+              <div class="testimonial-role">IT Manager, Mumbai</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Sold my property in Whitefield within a month. Ghar ki Samrat's listing process was smooth and I got genuine buyers. The platform is truly premium and trustworthy."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">PS</div>
+            <div>
+              <div class="testimonial-name">Priya Sharma</div>
+              <div class="testimonial-role">Business Owner, Bangalore</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card animate-on-scroll">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"As a first-time buyer in Kolkata, the RERA verification gave me confidence. The cart feature helped me shortlist and compare 5 properties before making my decision."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">VS</div>
+            <div>
+              <div class="testimonial-name">Vikram Singh</div>
+              <div class="testimonial-role">Software Engineer, Kolkata</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section faq-section" id="faq">
+    <div class="section-container">
+      <div class="faq-header">
+        <span class="section-badge">Common Questions</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Everything you need to know about buying and selling on Ghar ki Samrat.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item active">
+          <button class="faq-question">
+            Is Ghar ki Samrat free to use for buyers?
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">Yes! Ghar ki Samrat is completely free for property buyers. You can browse listings, add properties to your cart, and contact sellers without any charges. We only charge a small listing fee to sellers for premium placements.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Are all properties RERA verified?
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">We prioritize RERA-registered properties. Each listing goes through our verification process where we check legal documents, ownership records, and RERA compliance. Look for the "Verified" badge on listings.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            How do I contact a property seller?
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">Click on any property listing and you'll find two contact options: a direct phone call button and a WhatsApp button. WhatsApp opens a pre-filled message so you can start chatting with the seller instantly.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Can I list my property for sale?
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">Absolutely! Click on "Sell Property" in the navigation bar. Fill in your property details including title, price, location, and description. Your listing will be live immediately and visible to thousands of potential buyers.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            What cities does Ghar ki Samrat cover?
+            <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          </button>
+          <div class="faq-answer"><div class="faq-answer-inner">We currently cover 50+ Indian cities including Mumbai, Delhi NCR, Bangalore, Kolkata, Hyderabad, Chennai, Pune, Jaipur, Goa, Ahmedabad, and more. We're rapidly expanding to tier-2 and tier-3 cities as well.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section cta-section">
+    <div class="section-container">
+      <div class="cta-content">
+        <span class="section-badge" style="background:rgba(255,255,255,0.1);color:#4ade80;">Start Today</span>
+        <h2 class="section-title">Ready to Find Your<br/>Perfect Property?</h2>
+        <p class="section-subtitle">
+          Join 10,000+ happy property buyers and sellers across India.
+          Browse premium listings starting from ₹50 Lakh.
+        </p>
+        <a href="#properties" class="cta-btn">
+          Explore Properties
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="section contact-section" id="contact">
+    <div class="section-container">
+      <div class="contact-grid">
+        <div>
+          <span class="section-badge">Get In Touch</span>
+          <h2 class="section-title">Have a Question?<br/>We'd Love to Help</h2>
+          <p class="section-subtitle" style="margin-top:16px;">
+            Our team responds within 24 hours. Reach out for property queries, listing help, or partnership opportunities.
+          </p>
+          <div style="margin-top:32px;display:flex;flex-direction:column;gap:16px;">
+            <div style="display:flex;align-items:center;gap:12px;color:var(--text-gray);font-size:14px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              hello@provest.in
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;color:var(--text-gray);font-size:14px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              +91 98765 43210
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;color:var(--text-gray);font-size:14px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Kolkata, West Bengal, India
+            </div>
+          </div>
+        </div>
+        <form class="contact-form" id="contact-form">
+          <div class="form-group">
+            <label for="contact-name">Your Name</label>
+            <input type="text" id="contact-name" class="form-input" placeholder="Samrat" required />
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Email Address</label>
+            <input type="email" id="contact-email" class="form-input" placeholder="samrat@example.com" />
+          </div>
+          <div class="form-group">
+            <label for="contact-phone">Phone</label>
+            <input type="tel" id="contact-phone" class="form-input" placeholder="+91 98765 43210" />
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Your Message</label>
+            <textarea id="contact-message" class="form-input form-textarea" placeholder="Tell us how we can help..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/home" class="logo" style="margin-bottom:4px;">
+          <div class="logo-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="logo-text">Ghar ki Samrat</span>
+        </a>
+        <p>India's premium real estate marketplace. Buy, sell, and invest in properties across 50+ Indian cities with complete transparency.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <a href="#properties">Browse Properties</a>
+        <a href="/sell.html">Sell Property</a>
+        <a href="/cart.html">My Cart</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Blog</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">RERA Compliance</a>
+        <a href="#">Disclaimer</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Ghar ki Samrat. All rights reserved. Properties are subject to availability and verification.</p>
+    </div>
+  </footer>
+  <button class="chatbot-fab" id="chatbot-fab" title="Chat with AI Assistant">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    </svg>
+    <span class="chatbot-fab-pulse"></span>
+  </button>
+  <div class="chatbot-window" id="chatbot-window">
+    <div class="chatbot-header">
+      <div class="chatbot-header-info">
+        <div class="chatbot-avatar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <h4>Ghar ki Samrat AI</h4>
+          <span class="chatbot-status">Online</span>
+        </div>
+      </div>
+      <button class="chatbot-close" id="chatbot-close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages">
+      <div class="chat-message bot-message">
+        <div class="chat-bubble">👋 Hi! I'm your AI property assistant. Ask me about properties, prices, or locations across India!</div>
+      </div>
+      <div class="chatbot-suggestions" id="chatbot-suggestions">
+        <button class="chat-suggestion" data-msg="Best flats in Delhi under 1 Cr">🏠 Best flats in Delhi</button>
+        <button class="chat-suggestion" data-msg="Homes under 50 lakh in Kolkata">💰 Homes under 50L</button>
+        <button class="chat-suggestion" data-msg="How to sell property on this platform?">📋 How to sell?</button>
+      </div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbot-input" placeholder="Ask about properties..." autocomplete="off">
+      <button id="chatbot-send">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+  <script src="/auth.js"></script>
+  <script src="/app.js"></script>
+  <script>
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        if (!isActive) item.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

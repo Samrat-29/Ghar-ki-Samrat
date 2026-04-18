@@ -1,0 +1,37 @@
+[
+  {
+    "id": "user-1776481679222",
+    "name": "hjj",
+    "email": "samrat9474457@gmail.com",
+    "avatar": "",
+    "createdAt": "2026-04-18T03:07:59.222Z"
+  },
+  {
+    "id": "user-1776489429740",
+    "name": "Samrat ",
+    "mobile": "8101337206",
+    "password": "a6e23ad92c0c83551e07bc7e458cf6afaf719808068e3ceb83f70ac1ef639c43",
+    "createdAt": "2026-04-18T05:17:09.741Z"
+  },
+  {
+    "id": "user-1776504693724",
+    "name": "Samrat ",
+    "mobile": "8101337209",
+    "password": "0fd0a961e529bb13d744ae96ed19fd58b244f089c5abc2927116761427760b82",
+    "createdAt": "2026-04-18T09:31:33.724Z"
+  },
+  {
+    "id": "user-1776526910067",
+    "name": "Test User",
+    "mobile": "9876543210",
+    "password": "ecd71870d1963316a97e3ac3408c9835ad8cf0f3c1bc703527c30265534f75ae",
+    "createdAt": "2026-04-18T15:41:50.068Z"
+  },
+  {
+    "id": "user-1776527632534",
+    "name": "Test User",
+    "mobile": "1234567890",
+    "password": "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f",
+    "createdAt": "2026-04-18T15:53:52.535Z"
+  }
+]
